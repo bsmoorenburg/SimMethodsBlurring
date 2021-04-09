@@ -34,9 +34,6 @@ for i=1:1:blur_count;
 % Set up a filter kernel, a 7 by 7 window that takes the average of everything in the window.
 halfWindowSize = floor(windowSize / 2);
 kernel = ones(windowSize) / windowSize ^ 2;
-% If it's a convolution, flip the kernel
-% (Won't make a difference for a symmetric or uniform kernel though.)
-kernel = flipud(fliplr(kernel));
 
 %=================================================================================================
 % Scan the image pixel by pixel.  Go down rows first then columns because this will be the fastest direction.
