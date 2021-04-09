@@ -13,7 +13,6 @@ b=4;
 
 Image = imread('View.jpg');
 % Get the dimensions of the image.
-% numberOfColorBands should be = 1 for a gray scale image, and 3 for an RGB color image.
 [rows, columns] = size(Image)
 
 
