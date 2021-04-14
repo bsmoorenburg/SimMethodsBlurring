@@ -35,18 +35,13 @@ n=1;
 % Counter_1 is necessary for indexing the image in subplot grid 
 
 % Initializing blur/ blur_count/ Max iterations 
-blur=5;
+blur=13;
 blur_count= 5;
 max_iter=10000;
 % Max iterations necessary to automatically stop process in the event that
 % the user does not manually stop it after seeing the ERROR message. 
 
 for a=1:1:blur_count
-    
-%=================================================================================================
-% Setting up/ initializing a filter kernel, a matrix with dimensions based on blur value 
-% that takes the average of everything inside. Multiplying by this average later "blurs" the image. 
-kernel = ones(blur) / blur ^ 2;
 
 %=================================================================================================
 % Initializing Template   
@@ -68,29 +63,33 @@ for j = Correction + 1 : columns - Correction
     % COLUMNS are from INPUT Image 
 	for i = Correction + 1 : rows - Correction
         % ROWS are from INPUT Image 
-		% The Template/ blurred location in question is located at INPUT IMAGE (row, col).
-		% We'll be scanning the INPUT IMAGE, multiplying the indexed values
-		% by the kernel, before summing the matrix (with dimensions based on blur, just like the Kernel value) 
-        % together 
+		% The Template/ blurred location in question is located at INPUT IMAGE (i=ROW, j=COLUMN).
+		% To BLUR the Image, we'll be scanning the INPUT IMAGE, summing the values in the matrix 
+        %(with dimensions based on blur) before averaging them (blur^2).
+        % This is similar to applying a kernel. 
         
-        % Initializing the sum for the Template/blurred location.
+        % Initializing the sum for the Template/blur matrix.
 		pixelSum = 0; 
 		for c = 1 : blur
-			% Get the column index of the original image underneath the corresponding pixel in the filter window
+			% Getting the column index of the original image underneath the
+			% corresponding pixel in the template image 
 			ic = j + c - Correction - 1;
 			for r = 1 : blur
-				% Get the row index of the original image underneath the corresponding pixel in the filter window
+				% Getting the row index of the original image underneath the
+				% corresponding pixel in the template image 
 				ir = i + r - Correction - 1;
-				% Sum up the product into our running total for this window location.
-				pixelSum = pixelSum + double(Image(ir, ic)) * kernel(r, c);
+				% Summing the pixel values into a running total for the
+				% matrix location before averaging 
+				pixelSum = pixelSum + double(Image(ir, ic))/blur^2;
 			end
 		end
-		% Now we have the filtered value.  Assign it to our output image.
+		% Assigning the averaged/blurred value to the output image.
 		filteredImage(i, j) = pixelSum;
 	end
 end
 
 n=n+1;
+% Counter for subplot 
 
 subplot(3, 2, n);
 imshow(filteredImage, []);
@@ -98,7 +97,7 @@ caption = sprintf('Image width filter of %d', blur);
 title(caption, 'FontSize', 12);
 axis on;
 
-blur=blur+4;
+blur=blur+10;
 
 end
 
