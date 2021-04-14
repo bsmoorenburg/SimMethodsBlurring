@@ -41,7 +41,7 @@ max_iter=10000;
 % Max iterations necessary to automatically stop process in the event that
 % the user does not manually stop it after seeing the ERROR message. 
 
-for a=1:1:blur_count;
+for a=1:1:blur_count
     
 %=================================================================================================
 % Setting up/ initializing a filter kernel, a matrix with dimensions based on blur value 
@@ -68,21 +68,25 @@ for j = Correction + 1 : columns - Correction
     % COLUMNS are from INPUT Image 
 	for i = Correction + 1 : rows - Correction
         % ROWS are from INPUT Image 
-		% Now for a window with the center pixel situated at (row, col,
-		% scan the filter window, multiplying its values by the values of the original image underneath it.
-		localSum = 0; % Initialize sum to zero for this (row, column) location.
+		% The Template/ blurred location in question is located at INPUT IMAGE (row, col).
+		% We'll be scanning the INPUT IMAGE, multiplying the indexed values
+		% by the kernel, before summing the matrix (with dimensions based on blur, just like the Kernel value) 
+        % together 
+        
+        % Initializing the sum for the Template/blurred location.
+		pixelSum = 0; 
 		for c = 1 : blur
 			% Get the column index of the original image underneath the corresponding pixel in the filter window
-			ic = j + c - Correction - 1
+			ic = j + c - Correction - 1;
 			for r = 1 : blur
 				% Get the row index of the original image underneath the corresponding pixel in the filter window
-				ir = i + r - Correction - 1
+				ir = i + r - Correction - 1;
 				% Sum up the product into our running total for this window location.
-				localSum = localSum + double(Image(ir, ic)) * kernel(r, c)
+				pixelSum = pixelSum + double(Image(ir, ic)) * kernel(r, c);
 			end
 		end
 		% Now we have the filtered value.  Assign it to our output image.
-		filteredImage(i, j) = localSum;
+		filteredImage(i, j) = pixelSum;
 	end
 end
 
