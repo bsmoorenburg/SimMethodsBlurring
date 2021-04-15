@@ -39,10 +39,10 @@ max_iter=10000;
 for a=1:1:blur_count
 
 if channels>1
-    Output = 'ERROR; NOT GRAYSCALE IMAGE; will not render properly'
-    % Display ERROR Notification to Alert user to end program to conserve
-    % computer resources.
-    break
+   fprintf('ERROR: Image has %i channels, NOT GRAYSCALE IMAGE; will not render properly', channels)
+   break
+   % Display ERROR Notification and end program to conserve
+   % computer resources. 
 end
     
 
