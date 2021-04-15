@@ -1,6 +1,9 @@
 function [] = Image_Blurring(option)
 
 format compact; 
+clc;
+clear;
+close all;
 
 Image = imread(option);
 
@@ -19,8 +22,9 @@ for a=1:1:blur_count
        fprintf('ERROR: Image has %i channels, NOT GRAYSCALE IMAGE; will not render properly', channels)
        break
     end
-
-    filteredImage = zeros(size(Image));
+     
+    kernel=ones(blur)/blur^2;
+    filteredImage = Image;
     Correction = floor(blur / 2);
 
     for j = Correction + 1 : columns - Correction 
@@ -30,7 +34,7 @@ for a=1:1:blur_count
                 ic = j + c - Correction - 1;
                 for r = 1 : blur
                     ir = i + r - Correction - 1;
-                    pixelSum = pixelSum + double(Image(ir, ic))/blur^2;
+                    pixelSum = pixelSum + double(Image(ir, ic))*kernel(r,c);
                 end
             end
             filteredImage(i, j) = pixelSum;
@@ -45,7 +49,7 @@ for a=1:1:blur_count
     title(caption, 'FontSize', 12);
     axis on;
 
-    blur=blur+10;
+    blur=blur+6;
 
 end
 end
