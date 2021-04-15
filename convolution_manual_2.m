@@ -5,12 +5,12 @@ close all;  % Close all figures (except those of imtool.)
 format compact; % Delete empty space between outputs 
 fontSize = 15; 
 
+% Convert image into matrix
 Image = imread('View.jpg');
-% Get the dimensions of the image.
 
-% Size Image 
+% Check size of image and if image is grayscale
 [rows, columns, channels] = size(Image); 
-% Channels = layers of matrices; blue, yellow, and red color channels. 
+% Channels = number of colors; Grayscale = 1 & RGB = 3+
      
     
 % GRAYSCALE. Display the INPUT image.
