@@ -1,9 +1,7 @@
 % Set up / initialization
+clear;  % Erase all existing variables. Or clearvars if you want.
 clc;    % Clear the command window.
 close all;  % Close all figures (except those of imtool.)
-clear;  % Erase all existing variables. Or clearvars if you want.
-workspace;  % Make sure the workspace panel is showing.
-format long g; % Make format Long 
 format compact; % Delete empty space between outputs 
 fontSize = 15; 
 
