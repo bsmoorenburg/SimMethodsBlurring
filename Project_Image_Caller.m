@@ -7,7 +7,7 @@
 clc;
 clear;
 
-Option_1= 'view.png'
+Option_1= 'view.jpg'
 Option_2= 'image2'
 Option_3= 'image3'
 Option_4= 'image4' 
