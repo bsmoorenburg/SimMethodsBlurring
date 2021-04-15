@@ -12,13 +12,8 @@ Image = imread('View.jpg');
 
 % Size Image 
 [rows, columns, channels] = size(Image); 
-% Channels = layers of matrices; blue, yellow, and red color channels.
-if channels>1
-    Output = 'ERROR; NOT GRAYSCALE IMAGE; will not render properly'
-    % Display ERROR Notification to Alert user to end program to conserve
-    % computer resources. 
-    
-else 
+% Channels = layers of matrices; blue, yellow, and red color channels. 
+     
     
 % GRAYSCALE. Display the INPUT image.
 subplot(3, 2, 1); 
@@ -42,6 +37,14 @@ max_iter=10000;
 % the user does not manually stop it after seeing the ERROR message. 
 
 for a=1:1:blur_count
+
+if channels>1
+    Output = 'ERROR; NOT GRAYSCALE IMAGE; will not render properly'
+    % Display ERROR Notification to Alert user to end program to conserve
+    % computer resources.
+    break
+end
+    
 
 %=================================================================================================
 % Initializing Template   
