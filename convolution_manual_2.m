@@ -48,10 +48,7 @@ end
 
 %=================================================================================================
 % Initializing Template   
-filteredImage = zeros(size(Image));
-% Size(Image) was used earlier to determing if the image was grayscale. Now
-% it's being used to initialize a template of the blurred image, overlaying
-% on the original image with values being overwritten by a later loop. 
+filteredImage = Image;
 
 % Correcting Image, predicting which pixels will be inaccessible for the defined Kernel Matrix based off
 % of the blur value 
@@ -100,9 +97,7 @@ caption = sprintf('Image width filter of %d', blur);
 title(caption, 'FontSize', 12);
 axis on;
 
-blur=blur+10;
-
-end
+blur=blur+2;
 
 end
 
