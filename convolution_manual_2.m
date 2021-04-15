@@ -10,7 +10,7 @@ Image = imread('View.jpg');
 
 % Check size of image and if image is grayscale
 [rows, columns, channels] = size(Image); 
-% Channels = number of colors; Grayscale = 1 & RGB = 3+
+% Channels = number of layers in the image; Grayscale = 1 & RGB = 3+
      
     
 % GRAYSCALE. Display the INPUT image.
