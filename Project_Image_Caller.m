@@ -8,10 +8,10 @@ clc;
 clear;
 
 Option_1= 'view.jpg'
-Option_2= 'image2'
-Option_3= 'image3'
-Option_4= 'image4' 
+Option_2= 'GSlsu.png'
+Option_3= 'GSmike.png'
+Option_4= 'GStigers.png' 
 
 
-fprintf('Call the following Function to Blur the previous images \n Blur_Image(INPUT_IMAGE)')
+fprintf('Call the following Function to Blur the previous images\n Image_Blurring(Option_#) \n')
 
