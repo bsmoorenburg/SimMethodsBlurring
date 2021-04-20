@@ -1,19 +1,22 @@
-% Set up / initialization
-clear;  % Erase all existing variables. Or clearvars if you want.
-clc;    % Clear the command window.
-close all;  % Close all figures (except those of imtool.)
-format compact; % Delete empty space between outputs 
-fontSize = 15; 
+% Sim Methods Project: Grayscale Image Blurring 
+% Team 6: Benjamins Avants, Brennon Broussard, Bailey Smoorenburg, Cameron
+% Cage, Donovan Gegg 
+% 4/22/2021 
 
-% Convert image into matrix
-Image = imread(option);
+function(OUTPUT_IMAGE)=Blur_Image(INPUT_IMAGE)
 
-% Check size of image and if image is grayscale
+format compact % Delete empty space between outputs
+close all;  % Closes all figures
+
+Image = imread('View.jpg');
+% Get the dimensions of the image.
+
+% Size Image 
 [rows, columns, channels] = size(Image); 
-% Channels = number of layers in the image; Grayscale = 1 & RGB = 3+
-     
+% Channels = layers of matrices; blue, yellow, and red color channels.
     
-% GRAYSCALE. Display the INPUT image.
+% Display the INPUT image. If NOT grayscale, the later FOR LOOP will BREAK.
+
 subplot(3, 2, 1); 
 % Subplot. Create 3 by 2 Matrix of Slots for images. Images must fall
 % within boundaries or they will not display. 
@@ -23,37 +26,39 @@ imshow(Image, []);
 axis on;
 title('Original Grayscale', 'FontSize', 12);
 
-% Initializing Counter_1
+% Index Counter
 n=1;
 % Counter_1 is necessary for indexing the image in subplot grid 
 
-% Initializing blur/ blur_count/ Max iterations 
+% Initializing  blur/ blur_count/ Max iterations 
 blur=13;
 blur_count= 5;
-max_iter=10000;
-% Max iterations necessary to automatically stop process in the event that
-% the user does not manually stop it after seeing the ERROR message. 
 
 for a=1:1:blur_count
 
 if channels>1
-   fprintf('ERROR: Image has %i channels, NOT GRAYSCALE IMAGE; will not render properly', channels)
-   break
-   % Display ERROR Notification and end program to conserve
-   % computer resources. 
+    Output = 'ERROR; NOT GRAYSCALE IMAGE; will not render properly'
+    % Display ERROR Notification to Alert user that program CANNOT run.
+    break
 end
-    
 
 %=================================================================================================
 % Initializing Template   
 filteredImage = Image;
+% Overlaying the original image on itself with 2 layers with top Template layer values being overwritten by a later loop. 
 
+
+Correction = floor(blur / 2);
 % Correcting Image, predicting which pixels will be inaccessible for the defined Kernel Matrix based off
 % of the blur value 
-Correction = floor(blur / 2);
+
 % Floor command always rounds value down to the nearest whole number (necessary for image indexing)
 % Since blur will always be an odd number for this code (to help prevent blurred kernels from overlapping),
 % Correction will always be even.
+
+kernel = ones(blur) / blur ^ 2;
+% Kernel is the actual filter. In this code, it will be averaging the
+% values of the pixels
 
 %=================================================================================================
 % Scanning the template over the image, pixel by pixel.
@@ -63,8 +68,7 @@ for j = Correction + 1 : columns - Correction
         % ROWS are from INPUT Image 
 		% The Template/ blurred location in question is located at INPUT IMAGE (i=ROW, j=COLUMN).
 		% To BLUR the Image, we'll be scanning the INPUT IMAGE, summing the values in the matrix 
-        %(with dimensions based on blur) before averaging them (blur^2).
-        % This is similar to applying a kernel. 
+        %(with dimensions based on blur) before multiplying them by the kernel
         
         % Initializing the sum for the Template/blur matrix.
 		pixelSum = 0; 
@@ -78,7 +82,9 @@ for j = Correction + 1 : columns - Correction
 				ir = i + r - Correction - 1;
 				% Summing the pixel values into a running total for the
 				% matrix location before averaging 
-				pixelSum = pixelSum + double(Image(ir, ic))/blur^2;
+				pixelSum = pixelSum + double(Image(ir, ic))*kernel(r,c);
+                % Multiplying by the "kernel" filter. Again, in this case, it's
+                % averaging the values of the pixels in the submatrix.
 			end
 		end
 		% Assigning the averaged/blurred value to the output image.
@@ -90,13 +96,16 @@ n=n+1;
 % Counter for subplot 
 
 subplot(3, 2, n);
+% Plots on subplot grid, with position based on the counter.
 imshow(filteredImage, []);
 caption = sprintf('Image width filter of %d', blur);
 title(caption, 'FontSize', 12);
 axis on;
 
-blur=blur+2;
+blur=blur+6;% Increasing the blur for each subsequent image
+
+Output='SUCCESS. CHECK OUTPUT IMAGE.'
 
 end
 
-
+end
