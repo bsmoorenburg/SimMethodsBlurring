@@ -1,10 +1,5 @@
 function [] = Image_Blurring(option)
 
-format compact; 
-clc;
-clear;
-close all;
-
 Image = imread(option);
 
 [rows, columns, channels] = size(Image);  
@@ -49,7 +44,7 @@ for a=1:1:blur_count
     title(caption, 'FontSize', 12);
     axis on;
 
-    blur=blur+6;
+    blur=blur+12;
 
 end
 end
