@@ -6,7 +6,7 @@ format compact; % Delete empty space between outputs
 fontSize = 15; 
 
 % Convert image into matrix
-Image = imread('View.jpg');
+Image = imread(option);
 
 % Check size of image and if image is grayscale
 [rows, columns, channels] = size(Image); 
