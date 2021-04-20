@@ -7,11 +7,15 @@
 clc;
 clear;
 
-Option_1= 'view.jpg'
-Option_2= 'GSlsu.png'
-Option_3= 'GSmike.png'
-Option_4= 'GStigers.png' 
+Option_1= 'GSlsu.png'
+Option_2= 'GSmike.png'
+Option_3= 'GStigers.png' 
 
 
-fprintf('Call the following Function to Blur the previous images\n Image_Blurring(Option_#) \n')
 
+
+fprintf('Which of the previous options would you like to Blur?  \n')
+
+x=input('Which image will you select?')
+
+Image_Blurring(x);
