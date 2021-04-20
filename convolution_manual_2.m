@@ -3,12 +3,12 @@
 % Cage, Donovan Gegg 
 % 4/22/2021 
 
-function(OUTPUT_IMAGE)=Blur_Image(INPUT_IMAGE)
+function(Output)=Blur_Image(option)
 
 format compact % Delete empty space between outputs
 close all;  % Closes all figures
 
-Image = imread('View.jpg');
+Image = imread(option);
 % Get the dimensions of the image.
 
 % Size Image 
