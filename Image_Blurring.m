@@ -23,8 +23,7 @@ for a=1:1:blur_count
        fprintf('ERROR: Image has %i channels, NOT GRAYSCALE IMAGE; will not render properly', channels)
        break
     end
-     
-    kernel=ones(blur)/blur^2;
+
     filteredImage = Image;
     Correction = floor(blur / 2);
 
@@ -35,7 +34,7 @@ for a=1:1:blur_count
                 ic = j + c - Correction - 1;
                 for r = 1 : blur
                     ir = i + r - Correction - 1;
-                    pixelSum = pixelSum + double(Image(ir, ic))*kernel(r,c);
+                    pixelSum = pixelSum + double(Image(ir, ic))/blur^2;
                 end
             end
             filteredImage(i, j) = pixelSum;
@@ -50,7 +49,8 @@ for a=1:1:blur_count
     title(caption, 'FontSize', 12);
     axis on;
 
-    blur=blur+12;
+    blur=blur+10;
 
 end
+disp('SUCCESS. CHECK OUTPUT IMAGE.');
 end
