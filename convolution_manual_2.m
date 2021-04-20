@@ -3,7 +3,7 @@
 % Cage, Donovan Gegg 
 % 4/22/2021 
 
-function(Output)=Blur_Image(option)
+function()=Blur_Image(option)
 
 format compact % Delete empty space between outputs
 close all;  % Closes all figures
