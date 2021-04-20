@@ -1,3 +1,9 @@
+% Sim Methods Project: Grayscale Image Blurring 
+% Team 6: Benjamins Avants, Brennon Broussard, Bailey Smoorenburg, Cameron
+% Cage, Donovan Gegg 
+% 4/22/2021 
+% Function called by script to blur selected photo
+
 function [] = Image_Blurring(option)
 
 Image = imread(option);
